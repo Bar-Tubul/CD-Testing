@@ -2,11 +2,12 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/Bar-Tubul/CD-FWS.git'
+        REPO_URL = 'https://github.com/OrHazizaNitzanimToTech/CD-FWS.git'
         REPO_BRANCH = 'main'
         IMAGE_NAME = 'myapp'
         CONTAINER_NAME = 'nginx-app'
     }
+  
 
     stages {
         stage('Checkout') {
@@ -17,13 +18,14 @@ pipeline {
                 sh 'ls -l'
             }
         }
-
+       
         stage('Build Docker Image') {
             steps {
                 script {
                     // Change directory to 'src' where Dockerfile and index.html are located
                     dir('src') {
-                        // Build Docker image with no cache to ensure latest changes
+                        // Build Docker image with no cache to ensure latest changes and delete all images before creation 
+                        
                         sh 'docker build --no-cache -t ${IMAGE_NAME} .'
                     }
                 }
@@ -46,16 +48,10 @@ pipeline {
                 }
             }
         }
-
-        stage('Cleanup Old Image') {
-            steps {
-                script {
-                    // Remove the old image if it exists
-                    sh '''
-                    if [ $(docker images -q ${IMAGE_NAME}) ]; then
-                        docker rmi ${IMAGE_NAME}
-                    fi
-                    '''
+         stage('delete imsages'){
+            steps{
+                script{
+                    sh 'docker image prune -a -f'
                 }
             }
         }
