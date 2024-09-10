@@ -41,6 +41,13 @@ pipeline {
                     fi
                     '''
                     
+                    // Remove the old image if it exists
+                    sh '''
+                    if [ $(docker images -q ${IMAGE_NAME}) ]; then
+                        docker rmi ${IMAGE_NAME}
+                    fi
+                    '''
+
                     // Run the new container
                     sh 'docker run -d --name ${CONTAINER_NAME} -p 80:80 ${IMAGE_NAME}'
                 }
@@ -62,6 +69,7 @@ pipeline {
         }
     }
 }
+
 
 
                      
