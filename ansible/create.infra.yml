@@ -23,7 +23,7 @@
           #!/bin/bash
           apt update
           apt install -y ansible
-          sudo wget https://raw.githubusercontent.com/Bar-Tubul/CD-FWS/main/ansible/packages-installation.yml -O /home/ubuntu/packages-installation.yml
+          sudo wget https://raw.githubusercontent.com/Bar-Tubul/CD-Testing/main/ansible/packages-installation.yml -O /home/ubuntu/packages-installation.yml
           ansible-playbook /home/ubuntu/packages-installation.yml
         count: 1 #Change to the amount of Instances you would like to create
         name: "{{ item.name }}"
