@@ -18,8 +18,8 @@ Import this repository or copy the files to the exact location and folder as spe
 
   ```bash
   #!/bin/bash
-  apt update
-  apt install -y ansible
+  sudo apt update
+  sudo apt install -y ansible
   sudo wget https://raw.githubusercontent.com/<your_git_profile>/<your_repository_name>/main/ansible/packages-installation.yml -O /home/ubuntu/packages-installation.yml
   ansible-playbook /home/ubuntu/packages-installation.yml
   ```
